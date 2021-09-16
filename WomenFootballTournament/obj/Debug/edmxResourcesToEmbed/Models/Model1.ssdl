@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TournamentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Equipos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreEquipo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ColorEquipo" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Jugadoras">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Apellido" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="NroDocumento" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdEquipo" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Jugadoras_Equipos">
+    <End Role="Equipos" Type="Self.Equipos" Multiplicity="1" />
+    <End Role="Jugadoras" Type="Self.Jugadoras" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Jugadoras">
+        <PropertyRef Name="IdEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TournamentModelStoreContainer">
+    <EntitySet Name="Equipos" EntityType="Self.Equipos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Jugadoras" EntityType="Self.Jugadoras" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Jugadoras_Equipos" Association="Self.FK_Jugadoras_Equipos">
+      <End Role="Equipos" EntitySet="Equipos" />
+      <End Role="Jugadoras" EntitySet="Jugadoras" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

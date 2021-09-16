@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body onload="ShowNameTeams()">
+    <header>
+        <a href="teamcreate.html"><button>Agregar Equipo</button></a>
+        <a href="index.html"><h1>Torneo de Futbol Femenino 'Fx Women's Cup'</h1></a>
+        <a href="playercreate.html"><button>Agregar Jugador</button></a>
+    </header>
+    <main>
+        <form id="newPlayerForm">
+            <div class="formcol">
+                <label for="NameNewPlayer">Nombre</label>
+                <input type="text" id="NameNewPlayer" name="NameNewPlayer"> 
+            </div>
+            <div class="formcol">
+                <label for="SurnameNewPlayer">Apellido</label>
+                <input type="text" id="SurnameNewPlayer" name="SurnameNewPlayer"> 
+            </div>
+            <div class="formcol">
+                <label for="DniNewPlayer">Numero de DNI</label>
+                <input type="text" id="DniNewPlayer" name="DniNewPlayer"> 
+            </div>
+            <div class="formcol">
+                Equipo 
+                <select id="TeamNewPlayer" name="TeamNewPlayer" onload="ShowNameTeams()">
+                </select>
+            </div>
+            <div class="formcol">
+                <button id="SendButton">Añadir</button>
+            </div>
+        </form>
+    </main>
+    <footer>
+        <div>
+            <img src="img/logo-FX-informatica-blanco.png" alt="">
+        </div>
+        <div>
+            <p>FX Informática. © 2021. All Rights Reserved</p>
+        </div>
+    </footer>
+    <script src="js/createPlayer.js"></script>
+</body>
+</html>

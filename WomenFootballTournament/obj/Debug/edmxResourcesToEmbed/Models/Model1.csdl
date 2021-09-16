@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TournamentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Equipos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreEquipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ColorEquipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Jugadoras" Relationship="Self.FK_Jugadoras_Equipos" FromRole="Equipos" ToRole="Jugadoras" />
+  </EntityType>
+  <EntityType Name="Jugadoras">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NroDocumento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdEquipo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Equipos" Relationship="Self.FK_Jugadoras_Equipos" FromRole="Jugadoras" ToRole="Equipos" />
+  </EntityType>
+  <Association Name="FK_Jugadoras_Equipos">
+    <End Role="Equipos" Type="Self.Equipos" Multiplicity="1" />
+    <End Role="Jugadoras" Type="Self.Jugadoras" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Jugadoras">
+        <PropertyRef Name="IdEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TournamentEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Equipos" EntityType="Self.Equipos" />
+    <EntitySet Name="Jugadoras" EntityType="Self.Jugadoras" />
+    <AssociationSet Name="FK_Jugadoras_Equipos" Association="Self.FK_Jugadoras_Equipos">
+      <End Role="Equipos" EntitySet="Equipos" />
+      <End Role="Jugadoras" EntitySet="Jugadoras" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
